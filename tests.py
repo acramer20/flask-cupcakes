@@ -74,8 +74,7 @@ class CupcakeViewsTestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             data = resp.json
-            self.assertEqual(data, {
-                "cupcake": {
+            self.assertEqual(data, { "cupcakes":{
                     "id": self.cupcake.id,
                     "flavor": "TestFlavor",
                     "size": "TestSize",
@@ -107,3 +106,8 @@ class CupcakeViewsTestCase(TestCase):
             })
 
             self.assertEqual(Cupcake.query.count(), 2)
+
+    def test_delete_cupcake(self):
+        with app.test_client() as client:
+            url = f"/api/cupcakes/{self.cupcake.id}"
+            resp = client.patch(url, )
